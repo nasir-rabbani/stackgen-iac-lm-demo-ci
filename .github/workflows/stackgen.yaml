@@ -9,11 +9,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Brew install stackgen
-        run: brew install appcd-dev/stackgen/stackgen
-
-      - name: Authenticate with GitHub Container Registry
-        run: echo "${{ secrets.STACKGEN_PAT }}" | docker login ghcr.io -u nasir-rabbani --password-stdin
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: nasir-rabbani
+          password: ${{ secrets.STACKGEN_PAT }}
 
       - name: Run Stackgen provision help
         uses: stackgen-demo/stackgen-action@v0.0.1
