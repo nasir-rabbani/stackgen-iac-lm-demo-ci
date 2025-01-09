@@ -5,10 +5,15 @@ on:
 jobs:
   setup:
     uses: ./.github/workflows/setup-stackgen.yaml
+    secrets:
+      STACKGEN_TOKEN: ${{ secrets.STACKGEN_TOKEN }}
 
   destroy:
     needs: setup
     runs-on: ubuntu-latest
+    env:
+      STACKGEN_TOKEN: ${{ secrets.STACKGEN_TOKEN }}
+      STACKGEN_URL: "https://main.dev.stackgen.com/"
     steps:
       - name: Run Stackgen destroy
         run: stackgen destroy --appstack-id fc214ec5-c911-417f-9a63-09cf04f59cf9 --var="region=us-east-2"

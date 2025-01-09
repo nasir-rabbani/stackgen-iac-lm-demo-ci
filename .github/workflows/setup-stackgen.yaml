@@ -1,6 +1,9 @@
 name: Setup Stackgen
 on:
   workflow_call:
+    secrets:
+      STACKGEN_TOKEN:
+        required: true
 
 jobs:
   setup:
