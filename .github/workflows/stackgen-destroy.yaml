@@ -1,0 +1,14 @@
+name: Stackgen Destroy
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    uses: ./.github/workflows/setup-stackgen.yaml
+
+  destroy:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Stackgen destroy
+        run: stackgen destroy --appstack-id fc214ec5-c911-417f-9a63-09cf04f59cf9 --var="region=us-east-2"

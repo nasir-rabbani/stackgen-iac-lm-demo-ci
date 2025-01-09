@@ -1,0 +1,14 @@
+name: Stackgen Provision
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    uses: ./.github/workflows/setup-stackgen.yaml
+
+  provision:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Stackgen provision
+        run: stackgen provision --appstack-id fc214ec5-c911-417f-9a63-09cf04f59cf9 --var="region=us-east-2"
