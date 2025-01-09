@@ -23,7 +23,7 @@ jobs:
       - name: Get UUID for "simple-iac" appstack
         id: get-uuid
         run: |
-          APPSTACK_UUID=$(stackgen list-appstacks | jq -r '.[] | select(.appstack_name == "vpc-from-scratch") | .uuid')
+          APPSTACK_UUID=$(stackgen list-appstacks | jq -r '.[] | select(.appstack_name == "simple-iac") | .uuid')
           echo "APPSTACK_UUID=$APPSTACK_UUID" >> $GITHUB_ENV
 
       - name: Run Stackgen provision
