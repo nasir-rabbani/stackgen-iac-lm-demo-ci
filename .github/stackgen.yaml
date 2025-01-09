@@ -1,0 +1,17 @@
+name: Manual Stackgen Provision Help
+on:
+  workflow_dispatch:
+
+jobs:
+  stackgen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run Stackgen provision help
+        uses: your-org/stackgen-action@v0.0.1
+        with:
+          command: 'provision'
+          flags: |
+            --help
