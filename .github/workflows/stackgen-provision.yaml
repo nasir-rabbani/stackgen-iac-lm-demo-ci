@@ -17,5 +17,14 @@ jobs:
           stackgen-token: ${{ secrets.STACKGEN_TOKEN }}
           stackgen-url: ${{ env.STACKGEN_URL }}
 
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Get UUID for "simple-iac" appstack
+        id: get-uuid
+        run: |
+          APPSTACK_UUID=$(stackgen list-appstacks | jq -r '.[] | select(.appstack_name == "vpc-from-scratch") | .uuid')
+          echo "APPSTACK_UUID=$APPSTACK_UUID" >> $GITHUB_ENV
+
       - name: Run Stackgen provision
-        run: stackgen provision --appstack-id 9689f1af-3955-40b4-bd58-816a661bf3b1 --var="region=us-east-2"
+        run: stackgen provision --appstack-id ${{ env.APPSTACK_UUID }} --var="region=us-east-2"
