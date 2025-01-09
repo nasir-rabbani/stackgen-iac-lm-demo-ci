@@ -3,17 +3,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup:
-    uses: ./.github/workflows/setup-stackgen.yaml
-    secrets:
-      STACKGEN_TOKEN: ${{ secrets.STACKGEN_TOKEN }}
-
   provision:
-    needs: setup
     runs-on: ubuntu-latest
     env:
-      STACKGEN_TOKEN: ${{ secrets.STACKGEN_TOKEN }}
       STACKGEN_URL: "https://main.dev.stackgen.com/"
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure Stackgen
+        uses: ./.github/actions/setup-stackgen
+        with:
+          stackgen-token: ${{ secrets.STACKGEN_TOKEN }}
+          stackgen-url: ${{ env.STACKGEN_URL }}
+
       - name: Run Stackgen provision
         run: stackgen provision --appstack-id 9689f1af-3955-40b4-bd58-816a661bf3b1 --var="region=us-east-2"
