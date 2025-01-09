@@ -9,6 +9,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Authenticate with GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Run Stackgen provision help
         uses: stackgen-demo/stackgen-action@v0.0.1
         with:
