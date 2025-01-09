@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Stackgen provision
-        run: stackgen provision --appstack-id fc214ec5-c911-417f-9a63-09cf04f59cf9 --var="region=us-east-2"
+        run: stackgen provision --appstack-id 9689f1af-3955-40b4-bd58-816a661bf3b1 --var="region=us-east-2"
