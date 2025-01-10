@@ -36,4 +36,4 @@ jobs:
           echo "APPSTACK_UUID=$APPSTACK_UUID" >> $GITHUB_ENV
 
       - name: Run Stackgen destroy
-        run: stackgen destroy --appstack-id ${{ env.APPSTACK_UUID }} --var="region=us-east-2"
+        run: stackgen destroy --appstack-id ${{ env.APPSTACK_UUID }} --var="region=${{ env.AWS_REGION }}"
