@@ -16,6 +16,9 @@ jobs:
         with:
           stackgen-token: ${{ secrets.STACKGEN_TOKEN }}
           stackgen-url: ${{ env.STACKGEN_URL }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-east-2"
 
       - name: Run Stackgen provision
         run: stackgen provision --appstack-id 9689f1af-3955-40b4-bd58-816a661bf3b1 --var="region=us-east-2"
