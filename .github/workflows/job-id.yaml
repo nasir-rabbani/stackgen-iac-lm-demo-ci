@@ -4,10 +4,17 @@ on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        version: [1, 2, 3]
     steps:
-      - name: Get Job URL
+            # Step 1: Set the job URL as an environment variable
+      - name: Set Job URL environment variable
         run: |
-          echo "Job URL: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT"
+          JOB_URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT"
+          echo "JOB_URL=$JOB_URL" >> $GITHUB_ENV
+          echo "Set job URL: $JOB_URL"
+
+      # Step 2: Read the environment variable in subsequent steps
+      - name: Read Job URL from environment
+        run: |
+          echo "The workflow job URL is: $JOB_URL"
+          echo "Same URL via env: ${env:JOB_URL}"  # Alternative syntax
+      
