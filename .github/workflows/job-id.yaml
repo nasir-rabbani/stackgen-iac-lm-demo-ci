@@ -1,0 +1,13 @@
+name: Get Workflow Job URL
+on: [workflow_dispatch]
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1, 2, 3]
+    steps:
+      - name: Get Job URL
+        run: |
+          echo "Job URL: https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT"
